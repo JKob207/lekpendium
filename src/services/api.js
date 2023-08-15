@@ -1,33 +1,22 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '.firebase-config.js'
+import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from './firebase-config.js'
 
-const register = async () => {
+export const register = async (email, password) => {
     try {
-        const user = await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
-        console.log(user);
+        return await createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
         console.log(error.message);
     }
 }
 
-const login = async () => {
+export const login = async (email, password) => {
     try {
-        const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-        console.log(user);
+        return await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
         console.log(error.message);
     }
 }
 
-const logout = async () => {
+export const logout = async () => {
     await signOut(auth);
 }
-
-/*
-    useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    })
-  }, [auth.currentUser])
-  
-*/

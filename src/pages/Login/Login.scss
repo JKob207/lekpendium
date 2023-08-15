@@ -1,0 +1,58 @@
+@use "../../source" as *;
+
+.background
+{
+    @include primaryBackground;
+}
+
+.text-dark
+{
+    @include primaryBlackText;
+}
+
+.text-primary
+{
+    @include primaryTextBlue;
+}
+
+.input-form:focus
+{
+    @include inputFocusColor;
+}
+
+.primary-button
+{
+    @include primaryButton;
+}
+
+.login--page
+{
+    height: 100vh;
+}
+
+@media screen and (min-width: 768px) {
+    .primary-col, .secondary-col
+    {
+        width: 50%;
+    }
+
+    .login--page
+    {
+        display: flex;
+    }
+
+    .primary-col
+    {
+        background-color: white;
+        padding: 5rem;
+    }
+
+    .secondary-col
+    {
+        height: 100vh;
+        background-image: url("../../assets/img/login_register_background.png");
+        background-size: cover;
+        background-position: 25%;
+    }
+    
+}
