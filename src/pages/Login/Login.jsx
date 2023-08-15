@@ -12,6 +12,11 @@ export default function Login()
         password: ""
     })
 
+    const [errors, setErrors] = useState({
+        emailError: "",
+        passwordError: ""
+    })
+
     function handleChange(event) {
         const { name, value } = event.target
         setFormData(prevFormData => ({
@@ -22,12 +27,28 @@ export default function Login()
 
     async function handleSubmit()
     {
+        setErrors({
+            emailError: "",
+            passwordError: ""
+        })
+
         if(formData.email && formData.password)
         {
+            const isEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(formData.email);
+
+            if(!isEmail)
+            {
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    emailError: "Błędny adres email!"
+                }))
+                return
+            }
+
             try{
                 const loginResult = await login(formData.email, formData.password)
-                console.log(loginResult.user.uid)
-                if(loginResult.user.uid)
+                console.log(loginResult.user?.uid)
+                if(loginResult.user?.uid)
                 {
                     navigate("/main")
                 }
@@ -35,7 +56,22 @@ export default function Login()
             }catch(err)
             {
                 console.log(err)
+                setErrors((prevErrors) => ({
+                    ...prevErrors,
+                    emailError: "Błędne dane logowania!"
+                }))
             }
+        }else
+        {
+            if(!formData.email) setErrors((prevErrors) => ({
+                ...prevErrors,
+                emailError: "Brakujące pole!"
+            }))
+
+            if(!formData.password) setErrors((prevErrors) => ({
+                ...prevErrors,
+                passwordError: "Brakujące pole!"
+            }))
         }
     }
 
@@ -47,23 +83,23 @@ export default function Login()
                     <div className="login--form-container flex flex-col justify-center">
                         <form className="login--form">
                             <div className="form--email block text-sm font-light leading-6 text-dark">
-                                <label htmlFor="email">Email</label>
+                                <label htmlFor="email">Email { <span className="error text-red-600 font-semibold">{errors.emailError}</span> }</label>
                                 <input 
                                     id="email" 
                                     type="email"
                                     name="email"
-                                    className="block w-full p-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                    className={`block w-full p-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ${errors.emailError ? "ring-red-500" : "ring-gray-300"} placeholder:text-gray-400 sm:text-sm sm:leading-6`}
                                     onChange={handleChange} 
                                     value={formData.email}
                                 />
                             </div>
                             <div className="form--password block text-sm font-light leading-6 text-dark">        
-                                <label htmlFor="password">Hasło</label>
+                                <label htmlFor="password">Hasło { <span className="error text-red-600 font-semibold">{errors.passwordError}</span> }</label>
                                 <input 
                                     id="password" 
                                     type="password"
                                     name="password"
-                                    className="block w-full p-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                    className={`block w-full p-4 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ${errors.passwordError ? "ring-red-500" : "ring-gray-300"} placeholder:text-gray-400 sm:text-sm sm:leading-6`}
                                     onChange={handleChange} 
                                     defaultValue={formData.password}     
                                 />
