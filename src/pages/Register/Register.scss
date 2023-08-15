@@ -1,0 +1,78 @@
+@use "../../source" as *;
+
+.background
+{
+    @include primaryBackground;
+}
+
+.text-dark
+{
+    @include primaryBlackText;
+}
+
+.text-primary
+{
+    @include primaryTextBlue;
+}
+
+.input-form:focus
+{
+    @include inputFocusColor;
+}
+
+.primary-button
+{
+    @include primaryButton;
+}
+
+.register--page
+{
+    height: 100vh;
+}
+
+#avatar
+{
+    line-height: 2.4rem;
+}
+
+#avatar::file-selector-button
+{
+    @include primaryBackground;
+    color: white;
+    border: none;
+    cursor: pointer;
+    float: right;
+    margin-right: -15px;
+    margin-block: 0px;
+    line-height: 1.8rem;
+    padding: 0 10px;
+    border-radius:  0 5px 5px 0;
+    padding-block: 5px;
+}
+
+@media screen and (min-width: 768px) {
+    .primary-col, .secondary-col
+    {
+        width: 50%;
+    }
+
+    .register--page
+    {
+        display: flex;
+    }
+
+    .primary-col
+    {
+        background-color: white;
+        padding: 2rem;
+    }
+
+    .secondary-col
+    {
+        height: 100vh;
+        background-image: url("../../assets/img/login_register_background.png");
+        background-size: cover;
+        background-position: 25%;
+    }
+    
+}

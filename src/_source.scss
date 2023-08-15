@@ -1,0 +1,28 @@
+$primaryColor: #505DE4;
+$primaryBlack: #473335;
+
+@mixin primaryBackground {
+    background-color: $primaryColor;
+}
+
+@mixin inputFocusColor {
+    border-color: $primaryColor;
+}
+
+@mixin primaryBlackText {
+    color: $primaryBlack;
+}
+
+@mixin primaryTextBlue
+{
+    color: $primaryColor;
+}
+
+@mixin primaryButton {
+    background-color: $primaryBlack;
+    color: #fff;
+    font-size: 1.3rem;
+    text-align: center;
+    padding: .8rem 3.7rem;
+    border-radius: 50px;
+}
