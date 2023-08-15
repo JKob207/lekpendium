@@ -4,6 +4,8 @@ import './Footer.scss'
 export default function Footer()
 {
     return (
-        <div>Footer here</div>
+        <footer className="footer py-1">
+            <p className="text-center font-light text-white">Copyrights 2023 © Jakub Kobiałka</p>
+        </footer>
     )
 }

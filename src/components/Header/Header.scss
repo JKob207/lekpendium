@@ -1,0 +1,7 @@
+@use "../../source" as *;
+
+.header
+{
+    @include primaryBackground;
+    color: white;
+}

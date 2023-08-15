@@ -7,19 +7,22 @@ export default function AuthRequired()
     const [action, setAction] = useState(null)
 
     useEffect(() => {
-        const unregisterAuthObserver = auth.onAuthStateChanged(user =>
-            {
-                console.log(user)
-                if(!user)
+        const AuthObserver = async () => {
+            const unregisterAuthObserver = await auth.onAuthStateChanged(user =>
                 {
-                    setAction(<Navigate to="/" />)
-                }else
-                {
-                    setAction(<Outlet />)
+                    console.log(user)
+                    if(!user)
+                    {
+                        setAction(<Navigate to="/" />)
+                    }else
+                    {
+                        setAction(<Outlet />)
+                    }
                 }
-            }
-          )
-          return () => unregisterAuthObserver()
+              )
+        }
+        
+        return () => AuthObserver()
 
     }, [])
     
