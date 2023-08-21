@@ -1,6 +1,6 @@
 import { useState } from "react";
-import {decode as base64_decode, encode as base64_encode} from 'base-64';
-import { register } from "../../services/api";
+import { encode as base64_encode } from 'base-64';
+import { register, addUser, uploadImage } from "../../services/api";
 import { Link } from "react-router-dom";
 import './Register.scss'
 
@@ -29,6 +29,11 @@ export default function Register()
             ...prevFormData,
             [name]: value
         }))
+    }
+
+    function handleChangeFileUpload(event)
+    {
+        formData.avatar = event.target.files[0];
     }
 
     async function handleSubmit()
@@ -75,6 +80,21 @@ export default function Register()
             {
                 const registerResult = await register(formData.email, formData.password)
                 console.log(registerResult)
+
+                const uid = registerResult.user.uid
+
+                const avatarRef =  await uploadImage(formData.avatar, uid)
+
+                const newUser = {
+                    id: uid,
+                    name: formData.name,
+                    surname: formData.surname,
+                    email: formData.email,
+                    avatar: avatarRef
+                }
+                console.log(newUser)
+                await addUser(newUser)
+
             }catch(err)
             {
                 console.log(err)
@@ -89,7 +109,7 @@ export default function Register()
                 {
                     setErrors((prevErrors) => ({
                         ...prevErrors,
-                        emailError: "Błąd rejestracji użytkownika!"
+                        nameError: "Błąd rejestracji użytkownika!"
                     }))
                 }
             }
@@ -186,7 +206,7 @@ export default function Register()
                                     type="file"
                                     className="block w-full rounded-md border-0 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                     name="avatar"
-                                    onChange={handleChange}
+                                    onChange={handleChangeFileUpload}
                                 />
                             </div>
                         </form>

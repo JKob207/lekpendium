@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, getAuth } from 'firebase/auth'
-import { auth, db } from './firebase-config.js'
+import { auth, db, storage } from './firebase-config.js'
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
-
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 // Authentication API
 export const register = async (email, password) => {
@@ -51,7 +51,6 @@ export const addUser = async (newUser) => {
         const user = (({ id, ...o }) => o)(newUser);
         const id = newUser.id;
         await setDoc(doc(db, "users", id), user);
-
         console.log("New user added to db!");
     } catch (error) {
         console.log(error.message);
@@ -67,7 +66,7 @@ export const getUserById = async (id) => {
         if(userSnap.exists())
         {
             const user = {...userSnap.data(), id: id}
-            console.log(user);
+            //console.log(user);
             return user;
         }else
         {
@@ -99,4 +98,27 @@ export const deleteUser = async (id) => {
         console.log(error.message);
         return error.message;
     }
+}
+
+// Storage API
+export const uploadImage = async (image, id) =>
+{
+    if(!image) return "https://placehold.co/45"
+    const imageName = `${image.name}_${id}`
+    const imageRef = ref(storage, `avatars/${imageName}`)
+    try {
+        await uploadBytes(imageRef, image)
+        console.log("Avatar uploaded!")
+        return imageName;
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
+export const getAvatar = async (fileName) => {
+    if(fileName == "https://placehold.co/45") return fileName
+    const imageRef = ref(storage, `avatars/${fileName}`)
+    const url = await getDownloadURL(imageRef)
+    return url
 }

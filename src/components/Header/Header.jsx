@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './Header.scss'
-import { logout } from "../../services/api";
 import Dropdown from "../Dropdown/Dropdown";
+import { getAvatar } from "../../services/api";
 
-export default function Header()
+export default function Header({user})
 {
     const [toggleMenuState, setToggleMenuState] = useState(false)
+    const [userAvatar, setUserAvatar] = useState("https://placehold.co/45")
 
     function toggleMenu()
     {
@@ -13,13 +14,23 @@ export default function Header()
         setToggleMenuState(prev => !prev)
     }
 
+    useEffect(() => {
+        const getAvatarUrl = async () => {
+            console.log(user)
+            const avatar = await getAvatar(user.avatar)
+            setUserAvatar(avatar)
+        }
+
+        return () => getAvatarUrl()
+    }, [])
+
     return (
         <header className="header flex flex-row justify-between items-center w-full p-2">
             <img className="rounded-full" src="https://placehold.co/60" alt="LEKpendium logo" />
-            <div className="user-profile flex flex-row items-center justify-around	w-48">
-                <img className="rounded-full m-2" src="https://placehold.co/45" alt="User avatar" />
+            <div className="user-profile flex flex-row items-center justify-around w-48">
+                <img className="rounded-full m-2 w-11" src={userAvatar} alt="User avatar"  />
                 <div className="user-name">
-                    <span className="font-semibold">Jan Nowak</span>
+                    <span className="font-semibold">{`${user.name} ${user.surname}`}</span>
                 </div>
                 <div className="dropdown-menu-block">
                     <button className="toggleMenu" onClick={toggleMenu}>
