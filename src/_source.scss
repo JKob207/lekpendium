@@ -18,11 +18,32 @@ $primaryBlack: #473335;
     color: $primaryColor;
 }
 
-@mixin primaryButton {
-    background-color: $primaryBlack;
-    color: #fff;
+@mixin mainButtons
+{
     font-size: 1.3rem;
     text-align: center;
     padding: .8rem 3.7rem;
     border-radius: 50px;
+}
+
+@mixin primaryButton {
+    @include mainButtons();
+
+    padding: .8rem 3.7rem;
+    background-color: $primaryBlack;
+    color: #fff;
+}
+
+
+@mixin secondaryButton {
+    @include mainButtons();
+    
+    padding: .5rem 2.5rem;
+    background-color: #fff;
+    color: $primaryBlack;
+    border: 1px solid $primaryBlack;
+
+    @media screen and (max-width: 758px) {
+        font-size: 1.1em;
+    }
 }

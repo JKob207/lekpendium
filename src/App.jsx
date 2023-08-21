@@ -11,6 +11,7 @@ import Register from './pages/Register/Register'
 import AuthRequired from './components/AuthRequired/AuthRequired'
 import Layout from './components/Layout/Layout'
 import Dashboard from './pages/Dashboard/Dashboard'
+import Profile from './pages/Authenticated/Profile/Profile'
 
 export default function App() {
 
@@ -22,6 +23,7 @@ export default function App() {
       <Route element={<AuthRequired />}>
         <Route path='main' element={<Layout />} >
           <Route index element={<Dashboard />} />
+          <Route path='profile' element={<Profile />} />
         </Route>
 
       </Route>

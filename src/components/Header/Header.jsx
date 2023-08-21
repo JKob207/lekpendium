@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './Header.scss'
 import Dropdown from "../Dropdown/Dropdown";
 import { getAvatar } from "../../services/api";
+import { Link } from "react-router-dom";
 
 export default function Header({user})
 {
@@ -26,7 +27,9 @@ export default function Header({user})
 
     return (
         <header className="header flex flex-row justify-between items-center w-full p-2">
-            <img className="rounded-full" src="https://placehold.co/60" alt="LEKpendium logo" />
+            <Link to="/main">
+                <img className="rounded-full" src="https://placehold.co/60" alt="LEKpendium logo" />
+            </Link>
             <div className="user-profile flex flex-row items-center justify-around w-48">
                 <img className="rounded-full m-2 w-11" src={userAvatar} alt="User avatar"  />
                 <div className="user-name">

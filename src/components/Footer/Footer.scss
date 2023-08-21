@@ -1,9 +1,0 @@
-@use "../../source" as *;
-
-.footer
-{
-    @include primaryBackground;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}

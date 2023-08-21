@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, getAuth } from 'firebase/auth'
 import { auth, db, storage } from './firebase-config.js'
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 // Authentication API
 export const register = async (email, password) => {
@@ -118,7 +118,22 @@ export const uploadImage = async (image, id) =>
 
 export const getAvatar = async (fileName) => {
     if(fileName == "https://placehold.co/45") return fileName
+    try {
+        const imageRef = ref(storage, `avatars/${fileName}`)
+        return await getDownloadURL(imageRef)
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
+export const deleteImage = async (fileName) => {
     const imageRef = ref(storage, `avatars/${fileName}`)
-    const url = await getDownloadURL(imageRef)
-    return url
+    try {
+        await deleteObject(imageRef)
+        console.log("Image deleted!");
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
 }
