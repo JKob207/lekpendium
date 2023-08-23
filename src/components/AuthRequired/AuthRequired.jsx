@@ -1,25 +1,36 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Outlet, Navigate } from "react-router-dom";
 import { auth } from '../../services/firebase-config';
+import { getUserById } from '../../services/api';
+
+export const userContext = createContext(null);
 
 export default function AuthRequired()
 {
     const [action, setAction] = useState(null)
 
     useEffect(() => {
-        const unregisterAuthObserver = auth.onAuthStateChanged(user =>
-            {
-                console.log(user)
-                if(!user)
+        const AuthObserver = async () => {
+            await auth.onAuthStateChanged(async (user) =>
                 {
-                    setAction(<Navigate to="/" />)
-                }else
-                {
-                    setAction(<Outlet />)
+                    if(!user)
+                    {
+                        setAction(<Navigate to="/" />)
+                    }else
+                    {
+                        const userData = await getUserById(user.uid)
+
+                        setAction(
+                        <userContext.Provider value={userData}>
+                            <Outlet />
+                        </userContext.Provider>
+                        )
+                    }
                 }
-            }
-          )
-          return () => unregisterAuthObserver()
+              )
+        }
+        
+        return () => AuthObserver()
 
     }, [])
     

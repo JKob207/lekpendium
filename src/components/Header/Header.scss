@@ -1,0 +1,14 @@
+@use "../../source" as *;
+
+.header
+{
+    @include primaryBackground;
+    color: white;
+}
+
+.dropdown-menu-block
+{
+    position: relative;
+    height: 20px;
+    width: 20px;
+}

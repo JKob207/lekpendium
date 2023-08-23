@@ -1,8 +1,8 @@
-@use "../../source" as *;
+@use "../../../source" as *;
 
 .background
 {
-    @include primaryBackground;
+    background-color: #fff;
 }
 
 .text-dark
@@ -25,9 +25,9 @@
     @include primaryButton;
 }
 
-.register--page
+.secondary-button
 {
-    height: 100vh;
+    @include secondaryButton;
 }
 
 #avatar
@@ -56,7 +56,7 @@
         width: 50%;
     }
 
-    .register--page
+    .profile--page
     {
         display: flex;
     }
@@ -64,13 +64,13 @@
     .primary-col
     {
         background-color: white;
-        padding: 2rem;
+        padding: 1rem;
     }
 
     .secondary-col
     {
-        height: 100vh;
-        background-image: url("../../assets/img/login_register_background.png");
+        height: auto;
+        background-image: url("../../../assets/img/login_register_background.png");
         background-size: cover;
         background-position: 25%;
     }
