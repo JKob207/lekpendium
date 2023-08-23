@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, getAuth } from 'firebase/auth'
 import { auth, db, storage } from './firebase-config.js'
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore"
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc, query, where } from "firebase/firestore"
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
 // Authentication API
@@ -136,4 +136,43 @@ export const deleteImage = async (fileName) => {
         console.log(error.message);
         return error.message;
     }
+}
+
+// Questions API
+const questionsCategoryCollectionRef = collection(db, "questionsCategory");
+
+export const getAllCategories = async () => {
+    try {
+        const data = await getDocs(questionsCategoryCollectionRef)
+        const mapQuestionCategories = data.docs.map(doc => ({...doc.data(), id: doc.id}));
+        //console.log(mapQuestionCategories);
+        return mapQuestionCategories;
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
+export const getCategory = async (categoryName) => {
+    try {
+        const q = query(collection(db, "questionsCategory"), where("name", "==", categoryName));
+        const querySnapshot = await getDocs(q);
+        const category = {...querySnapshot.docs[0].data(), id: querySnapshot.docs[0].id};
+        return category;
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
+export const getCategoryQuestions = async (categoryName) => {
+    const category = await getCategory(categoryName);
+    const querySnapshot = await getDocs(collection(db, "questionsCategory", category.id, "questions"));
+    let questionsArray = [];
+    querySnapshot.forEach((doc) => {
+        //console.log(doc.id, " => ", doc.data());
+        questionsArray.push({...doc.data(), id: doc.id});
+    })
+    //console.log(questionsArray);
+    return questionsArray;
 }
