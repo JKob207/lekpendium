@@ -10,7 +10,7 @@ import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import AuthRequired from './components/AuthRequired/AuthRequired'
 import Layout from './components/Layout/Layout'
-import Dashboard from './pages/Dashboard/Dashboard'
+import Dashboard from './pages/Authenticated/Dashboard/Dashboard'
 import Profile from './pages/Authenticated/Profile/Profile'
 
 export default function App() {
