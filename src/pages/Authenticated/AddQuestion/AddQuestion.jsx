@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import "./AddQuestion.scss";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { userContext } from "../../../components/AuthRequired/AuthRequired";
 import { addQuestion } from "../../../services/api";
 
 export default function AddQuestion()
 {
     const params = useParams()
+    const navigate = useNavigate()
     const userID = useContext(userContext).id
 
     const [formData, setFormData] = useState({
@@ -223,7 +224,7 @@ export default function AddQuestion()
                     </div>
                     <div className="form-buttons">
                         <button className="primary-button" onClick={handleSubmit}>Zapisz</button>
-                        <button className="secondary-button">Anuluj</button>
+                        <Link to=".." relative="path" className="secondary-button">Anuluj</Link>
                     </div>
                 </form>
             </div>
