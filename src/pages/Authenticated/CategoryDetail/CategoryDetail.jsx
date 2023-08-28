@@ -18,7 +18,7 @@ export default function CategoryDetail()
     return (
         <div className="category-detail-container">
             <div className="category-title my-8">
-                <h1 className="text-center font-semibold text-2xl md:text-5xl capitalize">
+                <h1 className="text-center text-white font-semibold text-2xl md:text-5xl capitalize">
                     {params.name}
                 </h1>
             </div>
@@ -31,9 +31,11 @@ export default function CategoryDetail()
                 <div className="draw-questions-btn category-item cursor-pointer" onClick={togglePopup}>
                     <p className="text-4xl font-semibold text-white text-center">Losuj pytania</p>
                 </div>
-                <div className="add-questions-btn category-item cursor-pointer">
-                    <p className="text-4xl font-semibold text-white text-center">Dodaj pytanie</p>
-                </div>
+                <Link 
+                    to={`/main/category/${params.name}/add`}
+                    className="add-questions-btn category-item cursor-pointer">
+                        <p className="text-4xl font-semibold text-white text-center">Dodaj pytanie</p>
+                </Link>
             </div>
             {
                 togglePopupState ? <QuestionsPopup category={params.name} closePopup={togglePopup} /> : null

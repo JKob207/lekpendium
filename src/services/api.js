@@ -166,13 +166,31 @@ export const getCategory = async (categoryName) => {
 }
 
 export const getCategoryQuestions = async (categoryName) => {
-    const category = await getCategory(categoryName);
-    const querySnapshot = await getDocs(collection(db, "questionsCategory", category.id, "questions"));
-    let questionsArray = [];
-    querySnapshot.forEach((doc) => {
-        //console.log(doc.id, " => ", doc.data());
-        questionsArray.push({...doc.data(), id: doc.id});
-    })
-    //console.log(questionsArray);
-    return questionsArray;
+    try {
+        const category = await getCategory(categoryName);
+        const querySnapshot = await getDocs(collection(db, "questionsCategory", category.id, "questions"));
+        let questionsArray = [];
+        querySnapshot.forEach((doc) => {
+            //console.log(doc.id, " => ", doc.data());
+            questionsArray.push({...doc.data(), id: doc.id});
+        })
+        //console.log(questionsArray);
+        return questionsArray;
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
+export const addQuestion = async (questionData, categoryName) => {
+    try {
+        const category = await getCategory(categoryName);
+        const questionRef = collection(db, `questionsCategory/${category.id}/questions`);
+        await addDoc(questionRef, questionData);
+        console.log("Question added!");
+
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
 }

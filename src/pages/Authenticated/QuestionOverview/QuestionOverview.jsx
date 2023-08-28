@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getCategoryQuestions } from "../../../services/api";
 import Question from "../../../components/Question/Question";
+import "./QuestionOverview.scss";
 
 export default function QuestionOverview()
 {
@@ -29,7 +30,11 @@ export default function QuestionOverview()
 
     return (
         <div>
-            <h1>Questions here!</h1>
+            <div className="category-title">
+                <h1 className="text-center text-white font-semibold text-2xl md:text-5xl capitalize">
+                    {params.name}
+                </h1>
+            </div>
             {questionsElements}
         </div>
     )

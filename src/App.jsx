@@ -14,6 +14,7 @@ import Dashboard from './pages/Authenticated/Dashboard/Dashboard'
 import Profile from './pages/Authenticated/Profile/Profile'
 import CategoryDetail from './pages/Authenticated/CategoryDetail/CategoryDetail'
 import QuestionOverview from './pages/Authenticated/QuestionOverview/QuestionOverview'
+import AddQuestion from './pages/Authenticated/AddQuestion/AddQuestion'
 
 export default function App() {
 
@@ -27,6 +28,7 @@ export default function App() {
           <Route index element={<Dashboard />} />
           <Route path='category/:name' element={<CategoryDetail />} />
           <Route path='category/:name/overview' element={<QuestionOverview />} />
+          <Route path='category/:name/add' element={<AddQuestion />} />
           <Route path='profile' element={<Profile />} />
         </Route>
 

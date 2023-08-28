@@ -1,0 +1,43 @@
+@use "../../../source" as *;
+
+.primary-button
+{
+    @include primaryButton;
+}
+
+.secondary-button
+{
+    @include secondaryButton;
+}
+
+.add-question-form-container
+{
+    width: 80%;
+    margin: 0 auto;
+
+    .answers div
+    {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-block: 1rem;
+
+        & input[type="text"]
+        {
+            width: 80%;
+        }
+
+        & input[type="radio"]
+        {
+            accent-color: #00ff00;
+        }
+    }
+
+    .form-buttons
+    {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
