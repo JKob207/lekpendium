@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Dashboard.scss";
 import { getAllCategories } from "../../../services/api";
+import { Link } from "react-router-dom";
 
 export default function Dashboard()
 {
@@ -18,10 +19,10 @@ export default function Dashboard()
 
     const categoriesElements = categories.map(cat => {
         return (
-            <div className="category" key={cat.id}>
+            <Link to={`category/${cat.name}`} className="category" key={cat.id}>
                 <img src="https://placehold.co/50" alt="category img" />
                 <p>{cat.name}</p>
-            </div>
+            </Link>
         )
     })
 

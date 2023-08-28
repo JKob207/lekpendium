@@ -1,0 +1,76 @@
+@use "../../source" as *;
+
+.popup-background
+{
+    height: 89.3%;
+    position: absolute;
+    background-color: rgba(71,51,53,0.8);
+    width: 100%;
+    top: 76px;
+}
+
+.popup-container
+{
+    background-color: #fff;
+    width: 50%;
+    height: 60%;
+    position: absolute;
+    top: 25%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 25px;
+    border-radius: 35px;
+}
+
+.slider-range-value
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & input
+    {
+        width: 80%;
+    }
+
+
+    & span
+    {
+        width: 30px;
+        height: 30px;
+        font-weight: 600;
+        text-align: center;
+        vertical-align: middle;
+        background-color: #EFEBEB;
+        border: 1px solid #D4D4D8;
+    }
+}
+
+.time-input
+{
+    #time-counting:checked ~ .dot
+    {
+        transform: translateX(100%);
+        background-color: #505DE4;
+    }
+}
+
+.primary-button
+{
+    @include primaryButton;
+}
+
+@media screen and (max-width: 768px) {
+    .popup-background
+    {
+        height: 92%;
+    }
+    
+    .popup-container
+    {
+        width: 95%;
+        height: 50%;
+    }
+}

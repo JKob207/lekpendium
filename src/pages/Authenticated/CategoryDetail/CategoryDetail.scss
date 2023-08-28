@@ -1,0 +1,25 @@
+.category-options
+{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    justify-items: center;
+
+    .category-item
+    {
+        width: 90%;
+        height: 150px;
+        background-color: red;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .category-options {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
