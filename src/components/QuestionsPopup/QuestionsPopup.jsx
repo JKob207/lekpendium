@@ -5,9 +5,14 @@ import { Link } from "react-router-dom";
 export default function QuestionsPopup({category, closePopup})
 {
     const [amount, setAmount] = useState(25)
+    const [timer, setTimer] = useState(false)
 
     const changeAmount = event => {
         setAmount(event.target.value)
+    }
+
+    const changeTimer = () => {
+        setTimer(prev => !prev)
     }
 
     return (
@@ -38,15 +43,23 @@ export default function QuestionsPopup({category, closePopup})
                         <label htmlFor="time-counting" className="block mb-2 text-xl font-medium text-gray-900 dark:text-white flex justify-between	items-center">
                         Licz czas?
                             <div className="relative">
-                                <input id="time-counting" type="checkbox" className="sr-only" />
+                                <input
+                                    id="time-counting" 
+                                    type="checkbox" 
+                                    className="sr-only"
+                                    value={timer}
+                                    onChange={changeTimer}
+                                />
                                 <div className="w-10 h-4 bg-gray-400 rounded-full shadow-inner"></div>
                                 <div className="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"></div>
                             </div>
                         </label>
                     </div>
-                    <button
+                    <Link
+                        to='quiz'
+                        state={{amount: amount, timer: timer}}
                         className="primary-button my-7"
-                    >Rozpoczynam</button>
+                    >Rozpoczynam</Link>
                 </div>
             </div>
         </div>

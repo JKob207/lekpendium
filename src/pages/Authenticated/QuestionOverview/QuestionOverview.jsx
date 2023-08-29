@@ -13,7 +13,6 @@ export default function QuestionOverview()
     const [questions, setQuestions] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
 
-
     useEffect(() => {
         const getQuestions = async () => {
             const questionArr = await getCategoryQuestions(params.name)
@@ -23,16 +22,16 @@ export default function QuestionOverview()
         return () => getQuestions()
     }, [])
 
-    const currentTableData = useMemo(() => {
+    const currentQuestions = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
         return questions.slice(firstPageIndex, lastPageIndex);
       }, [currentPage, questions]);
 
-    const questionsElements = currentTableData.map((question, index) => {
+    const questionsElements = currentQuestions.map((question, index) => {
         return (
             <div key={index}>
-                <Question question={question} questionIndex={((currentPage-1)*PageSize)+(index+1)} />
+                <Question question={question} questionIndex={((currentPage-1)*PageSize)+(index+1)} type={"overview"} />
             </div>
         )
     })

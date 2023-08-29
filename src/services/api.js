@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, getAuth } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, db, storage } from './firebase-config.js'
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc, updateDoc, query, where } from "firebase/firestore"
 import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
@@ -174,6 +174,25 @@ export const getCategoryQuestions = async (categoryName) => {
             //console.log(doc.id, " => ", doc.data());
             questionsArray.push({...doc.data(), id: doc.id});
         })
+        //console.log(questionsArray);
+        return questionsArray;
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
+export const getLimitedAndRandomCategoryQuestion = async (categoryName, limitAmount) => {
+    try {
+        const categoryQuestions = await getCategoryQuestions(categoryName);
+        categoryQuestions.sort(() => Math.random() - 0.5);
+        const questionsArray = [];
+        const limit = limitAmount > categoryQuestions.length ? categoryQuestions.length : limitAmount;
+
+        for(let i=0;i<limit;i++)
+        {
+            questionsArray.push(categoryQuestions[i]);
+        }
         //console.log(questionsArray);
         return questionsArray;
     } catch (error) {
