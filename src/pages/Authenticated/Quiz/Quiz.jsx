@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
 import "./Quiz.scss";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getLimitedAndRandomCategoryQuestion } from "../../../services/api";
 import Pagination from "../../../components/Pagination/Pagination";
 import Question from "../../../components/Question/Question";
@@ -9,6 +9,7 @@ import Popup from "../../../components/Popup/Popup";
 export default function Quiz()
 {
     const location = useLocation()
+    const navigate = useNavigate()
     const params = useParams()
     const [questions, setQuestions] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
@@ -48,7 +49,8 @@ export default function Quiz()
             return
         }
 
-        
+        navigate("summary", { state: { results: results } })
+
     }
 
     const currentQuestions = useMemo(() => {

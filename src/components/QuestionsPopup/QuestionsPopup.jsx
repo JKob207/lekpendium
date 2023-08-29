@@ -17,7 +17,7 @@ export default function QuestionsPopup({category, closePopup})
 
     return (
         <div className="popup-background">
-            <div className="popup-container">
+            <div className="popup-questions-container">
                 <span className="cursor-pointer" onClick={closePopup}>&#10005;</span>
                 <h2 className="text-4xl	font-semibold text-center">Ustawienia Quizu</h2>
                 <div className="popup-settings flex flex-col">

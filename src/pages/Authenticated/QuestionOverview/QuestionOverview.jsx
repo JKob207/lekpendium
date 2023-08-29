@@ -31,7 +31,7 @@ export default function QuestionOverview()
     const questionsElements = currentQuestions.map((question, index) => {
         return (
             <div key={index}>
-                <Question question={question} questionIndex={((currentPage-1)*PageSize)+(index+1)} type={"overview"} />
+                <Question question={question} questionIndex={((currentPage-1)*PageSize)+(index+1)} type={"overview"} setAnswers={() => {}} answerResults={{}} />
             </div>
         )
     })

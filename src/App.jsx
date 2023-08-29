@@ -16,6 +16,7 @@ import CategoryDetail from './pages/Authenticated/CategoryDetail/CategoryDetail'
 import QuestionOverview from './pages/Authenticated/QuestionOverview/QuestionOverview'
 import AddQuestion from './pages/Authenticated/AddQuestion/AddQuestion'
 import Quiz from './pages/Authenticated/Quiz/Quiz'
+import QuizSummary from './pages/Authenticated/QuizSummary/QuizSummary'
 
 export default function App() {
 
@@ -31,6 +32,7 @@ export default function App() {
           <Route path='category/:name/overview' element={<QuestionOverview />} />
           <Route path='category/:name/add' element={<AddQuestion />} />
           <Route path='category/:name/quiz' element={<Quiz />} />
+          <Route path='category/:name/quiz/summary' element={<QuizSummary />} />
           <Route path='profile' element={<Profile />} />
         </Route>
 
