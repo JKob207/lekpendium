@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { encode as base64_encode } from 'base-64';
 import { register, addUser, uploadImage } from "../../services/api";
 import { Link } from "react-router-dom";
 import './Register.scss'
+import Popup from "../../components/Popup/Popup";
 
 export default function Register()
 {
+    const popupMessage = useRef({})
+    const [togglePopup, setTogglePopup] = useState(false)
+
     const [formData, setFormData] = useState({
         name: "",
         surname: "",
@@ -22,6 +26,11 @@ export default function Register()
         passwordError: "",
         passwordCheckError: ""
     })
+
+    useEffect(() => {
+        const timer = setTimeout(() => setTogglePopup(false), 6000);
+        return () => clearTimeout(timer);
+    }, [togglePopup])
 
     function handleChange(event) {
         const { name, value } = event.target
@@ -94,6 +103,16 @@ export default function Register()
                 }
                 console.log(newUser)
                 await addUser(newUser)
+                setTogglePopup(true)
+                popupMessage.current = {header: "Użytkownik zarejestrowany!", text: "Można teraz się zalogować", style:"info"}
+                setFormData({
+                    name: "",
+                    surname: "",
+                    email: "",
+                    password: "",
+                    passwordCheck: "",
+                    avatar: ""
+                })
 
             }catch(err)
             {
@@ -216,6 +235,9 @@ export default function Register()
                 </div>
             </div>
             <div className="secondary-col"></div>
+            {
+                togglePopup && <Popup header={popupMessage.current.header} text={popupMessage.current.text} style={popupMessage.current.style} />
+            }
         </div>
     )
 }

@@ -69,7 +69,7 @@ export default function Quiz()
 
     return (
         <div>
-            <h1>Quiz here!</h1>
+            <h1 className="quiz-title">Kategoria: {params.name}</h1>
             {questionsElements}
             <Pagination
                 className="pagination-bar"

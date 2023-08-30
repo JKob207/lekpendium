@@ -1,7 +1,8 @@
 import { useState } from "react";
-import './Login.scss'
+import './Login.scss';
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "./../../services/api"
+import { login } from "./../../services/api";
+import LEKpendium from "../../img/LEKpendium500x200.png";
 
 export default function Login()
 {
@@ -78,7 +79,7 @@ export default function Login()
     return (
         <div className="login--page">
             <div className="flex flex-col items-center background primary-col">
-                <img className="my-8 rounded-full" src="https://placehold.co/150" alt="LEKpendium logo" />
+                <img className="px-8 my-16 md:my-8" src={LEKpendium} alt="LEKpendium logo" />
                 <div className="login--container bg-white h-full w-full px-8 pt-16 rounded-t-3xl">
                     <div className="login--form-container flex flex-col justify-center">
                         <form className="login--form">

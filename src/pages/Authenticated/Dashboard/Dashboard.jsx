@@ -20,7 +20,7 @@ export default function Dashboard()
     const categoriesElements = categories.map(cat => {
         return (
             <Link to={`category/${cat.name}`} className="category" key={cat.id}>
-                <img src="https://placehold.co/50" alt="category img" />
+                <img src={cat.image} alt="category img" />
                 <p>{cat.name}</p>
             </Link>
         )
