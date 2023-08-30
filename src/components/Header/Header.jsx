@@ -17,7 +17,6 @@ export default function Header({user})
 
     useEffect(() => {
         const getAvatarUrl = async () => {
-            console.log(user)
             const avatar = await getAvatar(user.avatar)
             setUserAvatar(avatar)
         }

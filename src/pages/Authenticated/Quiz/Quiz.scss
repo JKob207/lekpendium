@@ -1,0 +1,6 @@
+@use "../../../source" as *;
+
+.primary-button
+{
+    @include primaryButton;
+}

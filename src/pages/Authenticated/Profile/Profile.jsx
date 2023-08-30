@@ -136,7 +136,7 @@ export default function Profile()
     return (
         <div className="profile--page">
             <div className="my-8 md:my-0 flex flex-col items-center background primary-col">
-                <img className="rounded-full" src={userAvatar} alt="LEKpendium logo" />
+                <img className="rounded-full w-44" src={userAvatar} alt="LEKpendium logo" />
                 <div className="profile--container bg-white h-full w-full px-8 rounded-t-3xl">
                     <div className="profile--form-container flex flex-col justify-center">
                         <form className="profile--form mt-4">

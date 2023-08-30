@@ -1,0 +1,54 @@
+.question-container
+{
+    padding: 10px;
+
+    .question
+    {
+        display: flex;
+        justify-content: space-between;
+        background-color: #FFF9FB;
+        border: 1px solid #D4D4D8;
+        padding: 15px;
+    }
+
+    .answer
+    {
+        cursor: pointer;
+    }
+
+    .disabled
+    {
+        cursor: default;
+    }
+
+    .close
+    {
+        border-radius: 15px;
+    }
+
+    .open
+    {
+        border-radius: 15px 15px 0 0;
+    }
+
+    .answers
+    {
+        background-color: #FFF9FB;
+        
+        .answer p
+        {
+            padding: 15px;
+            border: 1px solid #D4D4D8;
+        }
+
+        .goodAnswer
+        {
+            background-color: #BBFAC9;
+        }
+
+        .badAnswer
+        {
+            background-color: #FF8777;
+        }
+    }
+}
