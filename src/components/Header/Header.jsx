@@ -18,11 +18,15 @@ export default function Header({user})
 
     useEffect(() => {
         const getAvatarUrl = async () => {
-            const avatar = await getAvatar(user.avatar)
-            setUserAvatar(avatar)
+            try {
+                const avatar = await getAvatar(user.avatar)
+                setUserAvatar(avatar)
+            } catch (error) {
+                console.log(error)
+            }
         }
 
-        return () => getAvatarUrl()
+        getAvatarUrl()
     }, [])
 
     return (

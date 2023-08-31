@@ -10,11 +10,15 @@ export default function Dashboard()
     useEffect(() => {
         
         const getCategories = async () => {
-            const categoriesData = await getAllCategories()
-            setCategories(categoriesData)
+            try {
+                const categoriesData = await getAllCategories()
+                setCategories(categoriesData)
+            } catch (error) {
+                console.log(error)
+            }
         }
 
-        return () => getCategories()
+        getCategories()
     }, [])
 
     const categoriesElements = categories.map(cat => {

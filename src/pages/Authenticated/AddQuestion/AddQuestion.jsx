@@ -97,7 +97,7 @@ export default function AddQuestion()
         }
 
         try {
-            await addQuestion(questionData, params.name)
+            const result = await addQuestion(questionData, params.name)
             setFormData({
                 question: "",
                 answerA: "",
@@ -111,9 +111,7 @@ export default function AddQuestion()
             console.log(err)
         }
     }
-
-
-
+    
     return (
         <div>
             <div className="category-title">

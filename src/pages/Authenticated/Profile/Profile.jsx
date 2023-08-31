@@ -31,11 +31,15 @@ export default function Profile()
         formData.avatar = user.avatar
 
         const getAvatarUrl = async () => {
-            const avatar = await getAvatar(user.avatar)
-            setUserAvatar(avatar)
+            try {
+                const avatar = await getAvatar(user.avatar)
+                setUserAvatar(avatar)
+            } catch (error) {
+                console.log(error)
+            }
         }
 
-        return () => getAvatarUrl()
+        getAvatarUrl()
 
     }, [])
 
@@ -80,7 +84,7 @@ export default function Profile()
             if(avatarRef)
             {
                 try {
-                        await deleteImage(user.avatar)
+                        const deleteAvatar = await deleteImage(user.avatar)
                         avatarRef =  await uploadImage(formData.avatar, user.id)
                         console.log("Avatar changed!")
                     } catch (error) {
@@ -101,7 +105,7 @@ export default function Profile()
                     avatar: avatarRef
                 }
 
-                await updateUser(user.id, updatedUser)
+                const updateUser = await updateUser(user.id, updatedUser)
                 console.log("User updated!")
                 navigate(0)
 
