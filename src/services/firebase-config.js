@@ -4,7 +4,7 @@ import { getFirestore } from "@firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: "AIzaSyDKmt_ua7BrwblFJuaP6J9rnUUK_glD9uw",
   authDomain: "lekpendium.firebaseapp.com",
   projectId: "lekpendium",
   storageBucket: "lekpendium.appspot.com",
