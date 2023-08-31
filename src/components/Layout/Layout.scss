@@ -1,0 +1,13 @@
+.main-container
+{
+    background-image: url("../../img/background-desktop.png");
+    background-size: cover;
+    height: 88.5vh;
+}
+
+@media screen and (max-width: 768px) {
+    .main-container
+    {
+        background-image: url("../../img/background-mobile.png");
+    }
+}

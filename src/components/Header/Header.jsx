@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import './Header.scss'
+import './Header.scss';
 import Dropdown from "../Dropdown/Dropdown";
 import { getAvatar } from "../../services/api";
 import { Link } from "react-router-dom";
+import LEKpendium from "../../img/LEKpendium500x200.png";
 
 export default function Header({user})
 {
@@ -27,7 +28,7 @@ export default function Header({user})
     return (
         <header className="header flex flex-row justify-between items-center w-full p-2">
             <Link to="/main">
-                <img className="rounded-full" src="https://placehold.co/60" alt="LEKpendium logo" />
+                <img className="LEKpendium-logo" src={LEKpendium} alt="LEKpendium logo" />
             </Link>
             <div className="user-profile flex flex-row items-center justify-around w-48">
                 <img className="rounded-full m-2 w-11" src={userAvatar} alt="User avatar"  />

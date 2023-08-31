@@ -15,6 +15,7 @@ export default function Quiz()
     const [currentPage, setCurrentPage] = useState(1)
     const [results, setResults] = useState({})
     const [togglePopup, setTogglePopup] = useState(false)
+    const [timerTime, setTimerTime] = useState(0)
     const popupMessage = useRef({})
     const PageSize = 10
 
@@ -39,6 +40,13 @@ export default function Quiz()
         const timer = setTimeout(() => setTogglePopup(false), 6000);
         return () => clearTimeout(timer);
     }, [togglePopup])
+
+    useEffect(() => {
+        const interval = location.state.timer ? setInterval(() => {
+            setTimerTime((prev => prev + 1))
+        }, 1000) : null
+        return () => {if(interval) clearInterval(interval)};
+      }, [])
 
     function endQuiz()
     {
@@ -67,9 +75,22 @@ export default function Quiz()
         )
     })
 
+    function pad(value) //formating timer time
+    {
+        let valString = value + "";
+        if (valString.length < 2) {
+            return "0" + valString;
+        } else {
+            return valString;
+        }
+    }
+
     return (
         <div>
-            <h1>Quiz here!</h1>
+            <div className="quiz-title-container">
+                <h1 className="quiz-title">Kategoria: {params.name}</h1>
+                <h2 className="timer">{location.state.timer && (pad(parseInt(timerTime / 60) + ":" + pad(timerTime % 60)))}</h2>
+            </div>
             {questionsElements}
             <Pagination
                 className="pagination-bar"

@@ -4,3 +4,25 @@
 {
     @include primaryButton;
 }
+
+.quiz-title-container
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+
+    .quiz-title
+    {
+        text-transform: capitalize;
+        font-weight: 600;
+        font-size: 1.8rem;
+        text-align: center;
+        margin-block: 1.3rem;
+    }
+
+    .timer
+    {
+        font-size: 1.5rem;
+    }
+}
