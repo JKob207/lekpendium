@@ -10,9 +10,7 @@ export default function CategoryDetail()
 
     function togglePopup()
     {
-        console.log("PupUp toggle!")
         setTogglePopupState(prev => !prev)
-
     }
 
     return (

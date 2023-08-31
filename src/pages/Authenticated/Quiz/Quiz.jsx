@@ -21,12 +21,16 @@ export default function Quiz()
 
     useEffect(() => {
         const getQuestions = async () => {
-            const questionArr = await getLimitedAndRandomCategoryQuestion(params.name, location.state.amount)
-            //console.log(questionArr)
-            setQuestions(questionArr)
+            try {
+                const questionArr = await getLimitedAndRandomCategoryQuestion(params.name, location.state.amount)
+                //console.log(questionArr)
+                setQuestions(questionArr)
+            } catch (error) {
+                console.log(error)
+            }
         }
 
-        return () => getQuestions()
+        getQuestions()
     }, [])
 
     function setAnswers(index, result)

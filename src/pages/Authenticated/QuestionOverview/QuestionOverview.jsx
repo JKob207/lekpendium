@@ -15,11 +15,14 @@ export default function QuestionOverview()
 
     useEffect(() => {
         const getQuestions = async () => {
-            const questionArr = await getCategoryQuestions(params.name)
-            console.log(questionArr)
-            setQuestions(questionArr)
+            try {
+                const questionArr = await getCategoryQuestions(params.name)
+                setQuestions(questionArr)
+            } catch (error) {
+                console.log(error)
+            }
         }
-        return () => getQuestions()
+        getQuestions()
     }, [])
 
     const currentQuestions = useMemo(() => {

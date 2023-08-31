@@ -11,7 +11,8 @@ export default function AuthRequired()
 
     useEffect(() => {
         const AuthObserver = async () => {
-            await auth.onAuthStateChanged(async (user) =>
+            try {
+                const result = await auth.onAuthStateChanged(async (user) =>
                 {
                     if(!user)
                     {
@@ -19,6 +20,7 @@ export default function AuthRequired()
                     }else
                     {
                         const userData = await getUserById(user.uid)
+                        console.log(userData)
 
                         setAction(
                         <userContext.Provider value={userData}>
@@ -26,11 +28,14 @@ export default function AuthRequired()
                         </userContext.Provider>
                         )
                     }
-                }
-              )
+                })
+            } catch (error) {
+                console.log(error)   
+            }
         }
         
-        return () => AuthObserver()
+        AuthObserver()
+        //return () => AuthObserver()
 
     }, [])
     
