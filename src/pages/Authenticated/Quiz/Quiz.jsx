@@ -61,7 +61,7 @@ export default function Quiz()
             return
         }
 
-        navigate("summary", { state: { results: results } })
+        navigate("summary", { state: { results: results, time: timerTime } })
 
     }
 

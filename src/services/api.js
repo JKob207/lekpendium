@@ -79,6 +79,9 @@ export const getUserById = async (id) => {
 }
 
 export const updateUser = async (id, newUserData) => {
+    console.log("API")
+    console.log(id)
+    console.log(newUserData)
     const userDoc = doc(db, "users", id);
     try {
         await updateDoc(userDoc, newUserData);
@@ -212,4 +215,11 @@ export const addQuestion = async (questionData, categoryName) => {
         console.log(error.message);
         return error.message;
     }
+}
+
+const userek = {
+    avatar: "AAAA",
+    email: "testerC@gmail.com",
+    name: "TesterC",
+    surname: "TestC"
 }

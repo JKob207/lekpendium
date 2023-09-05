@@ -8,6 +8,18 @@ export default function QuizSummary()
     const params = useParams()
     const resultElements = []
 
+    console.log(location.state)
+
+    function pad(value) //formating timer time
+    {
+        let valString = value + "";
+        if (valString.length < 2) {
+            return "0" + valString;
+        } else {
+            return valString;
+        }
+    }
+
     for (const property in location.state.results) {
         resultElements.push(
             <div key={property} className={`${location.state.results[property] ? "successAnswer" : "wrongAnswer"} result`}>
@@ -32,6 +44,13 @@ export default function QuizSummary()
             <div className="results-container">
                 {resultElements}
             </div>
+            {
+                location.state.time && 
+                <div className="results-time text-center text-2xl font-semibold my-8">
+                    <p>Osiągnięty czas:</p>
+                    <p>{pad(parseInt(location.state.time / 60) + ":" + pad(location.state.time % 60))}</p>
+                </div>
+            }
             <div className="button">
                 <Link to="/main" className="primary-button">
                     Powrót do strony głównej
