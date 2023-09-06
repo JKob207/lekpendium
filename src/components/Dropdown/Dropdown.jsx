@@ -18,7 +18,7 @@ export default function Dropdown({ toggleState })
                     <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ulubione</a>
                 </li>
                 <li>
-                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Twoje pytania</a>
+                    <Link to="userQuestions/all" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Twoje pytania</Link>
                 </li>
             </ul>
             <div className="py-2" onClick={logout}>
