@@ -1,26 +1,27 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import "./AddQuestion.scss";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import "./EditQuestion.scss";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { userContext } from "../../../components/AuthRequired/AuthRequired";
-import { addQuestion } from "../../../services/api";
+import { deleteQuestion, updateQuestion } from "../../../services/api";
 import Popup from "../../../components/Popup/Popup";
 
-export default function AddQuestion()
+export default function EditQuestion()
 {
     const params = useParams()
+    const oldQuestion = useLocation().state
     const navigate = useNavigate()
     const userID = useContext(userContext).id
     const [togglePopup, setTogglePopup] = useState(false)
     const popupMessage = useRef({})
 
     const [formData, setFormData] = useState({
-        question: "",
-        answerA: "",
-        answerB: "",
-        answerC: "",
-        answerD: "",
-        answerE: "",
-        correctAnswer: 0
+        question: oldQuestion.question,
+        answerA: oldQuestion.answers[0],
+        answerB: oldQuestion.answers[1],
+        answerC: oldQuestion.answers[2],
+        answerD: oldQuestion.answers[3],
+        answerE: oldQuestion.answers[4],
+        correctAnswer: oldQuestion.rightAnswer
     })
 
     const [errors, setErrors] = useState({
@@ -51,7 +52,6 @@ export default function AddQuestion()
     async function handleSubmit(event)
     {
         event.preventDefault()
-        //console.log(formData)
 
         setErrors({
             questionError: "",
@@ -97,7 +97,7 @@ export default function AddQuestion()
             return
         }
 
-        const questionData = {
+        const newQuestionData = {
             question: formData.question,
             answers: [formData.answerA, formData.answerB, formData.answerC, formData.answerD, formData.answerE],
             rightAnswer: formData.correctAnswer,
@@ -105,33 +105,29 @@ export default function AddQuestion()
         }
 
         try {
-            const result = await addQuestion(questionData, params.name)
-            setFormData({
-                question: "",
-                answerA: "",
-                answerB: "",
-                answerC: "",
-                answerD: "",
-                answerE: "",
-                correctAnswer: 0
-            })
-            popupMessage.current = {header: "Pytanie dodane!", text: "Nowe pytanie zostało dodane do bazy", style:"info"}
+            const result = await updateQuestion(params.name, oldQuestion.id, newQuestionData)
+            popupMessage.current = {header: "Pytanie zaktualizowane!", text: "Zaktualizowane pytanie zostało dodane do bazy", style:"success"}
             setTogglePopup(true)
         } catch (error) {
-            console.log(err)
+            console.log(error)
         }
     }
-    
+
+    async function removeQuestion()
+    {
+        try {
+            const result = await deleteQuestion(params.name, oldQuestion.id)
+            navigate(-1)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
-        <div>
-            <div className="category-title">
-                <h1 className="text-center text-white font-semibold text-2xl md:text-5xl capitalize">
-                    {params.name}
-                </h1>
-            </div>
-            <div className="add-question-form-container">
+        <div className="mt-16 h-screen">
+            <div className="edit-question-form-container">
                 <form>
-                    <div className="question-textarena block text-sm font-light leading-6 text-dark">
+                    <div className="question-textarena block text-sm font-normal leading-6 text-dark">
                         <label htmlFor="question">Treść pytania: { <span className="error text-red-600 font-semibold">{errors.questionError}</span> }</label>
                         <textarea 
                             id="question" 
@@ -230,11 +226,18 @@ export default function AddQuestion()
                             />
                         </div>
                     </div>
-                    <div className="form-buttons">
-                        <button className="primary-button" onClick={handleSubmit}>Zapisz</button>
-                        <Link to=".." relative="path" className="secondary-button">Anuluj</Link>
-                    </div>
                 </form>
+                <div className="form-buttons">
+                        <button className="primary-button" onClick={handleSubmit}>Zapisz</button>
+                        <button className="danger-button" onClick={removeQuestion}>Usuń pytanie</button>
+                    </div>
+                    <div className="text-center my-8">
+                        <Link
+                            to=".."
+                            relative="path"
+                            className="leading-6 text-dark font-semibold"
+                        >Powrót do pytań</Link>
+                    </div>
             </div>
             {
                 togglePopup && <Popup header={popupMessage.current.header} text={popupMessage.current.text} style={popupMessage.current.style} />

@@ -79,9 +79,6 @@ export const getUserById = async (id) => {
 }
 
 export const updateUser = async (id, newUserData) => {
-    console.log("API")
-    console.log(id)
-    console.log(newUserData)
     const userDoc = doc(db, "users", id);
     try {
         await updateDoc(userDoc, newUserData);
@@ -219,29 +216,40 @@ export const addQuestion = async (questionData, categoryName) => {
 
 export const getUserQuestions = async (userId, categoryName) => {
     try {
-        let categoryArray = [];
         let questionsArray = [];
 
-        if(categoryName == "all")
-        {
-            categoryArray = ["interna", "medycyna ratunkowa i intensywna terapia", "medycyna rodzinna", "prawo medyczne", "chirurgia", "psychiatria", "pediatria", "ginekologia"];
-        }else
-        {
-            categoryArray = [categoryName];
-        }
-
-        for (const cat of categoryArray)
-        {
-            const category = await getCategory(cat);
-            const questionRef = collection(db, `questionsCategory/${category.id}/questions`);
-            const q = query(questionRef, where("questionOwner", "==", userId));
-            const querySnapshot = await getDocs(q);
-            querySnapshot.forEach((doc) => {
-                questionsArray.push({...doc.data(), id: doc.id});
-            })
-        }
+        const category = await getCategory(categoryName);
+        const questionRef = collection(db, `questionsCategory/${category.id}/questions`);
+        const q = query(questionRef, where("questionOwner", "==", userId));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            questionsArray.push({...doc.data(), id: doc.id});
+        })
 
         return questionsArray;
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
+export const updateQuestion = async (categoryName, questionId, newQuestionData) => {
+    try {
+        const category = await getCategory(categoryName);
+        const questionRef = doc(db, "questionsCategory", category.id, "questions", questionId);
+        await updateDoc(questionRef, newQuestionData);
+        console.log(`Question ${questionId} updated!`);
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
+export const deleteQuestion = async (categoryName, questionId) => {
+    try {
+        const category = await getCategory(categoryName);
+        const questionRef = doc(db, "questionsCategory", category.id, "questions", questionId);
+        await deleteDoc(questionRef);
     } catch (error) {
         console.log(error.message);
         return error.message;

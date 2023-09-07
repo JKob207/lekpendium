@@ -1,0 +1,52 @@
+@use "../../../source" as *;
+
+.danger-button
+{
+    @include dangerButton;
+}
+
+.edit-question-form-container
+{
+    width: 80%;
+    margin: 0 auto;
+
+    .answers div
+    {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        margin-block: 1rem;
+
+        & input[type="text"]
+        {
+            width: 80%;
+        }
+
+        & input[type="radio"]
+        {
+            accent-color: #00ff00;
+        }
+    }
+
+    .form-buttons
+    {
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .edit-question-form-container
+    {
+        .form-buttons
+        {
+            flex-direction: column;
+
+            & button
+            {
+                margin-block: 10px;
+            }
+        }
+    }
+}

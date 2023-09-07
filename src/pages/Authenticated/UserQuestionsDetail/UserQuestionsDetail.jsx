@@ -37,7 +37,7 @@ export default function UserQuestionsDetail()
     const questionsElements = currentQuestions.map((question, index) => {
         return (
             <div key={index}>
-                <Question question={question} questionIndex={((currentPage-1)*PageSize)+(index+1)} type={"overview"} setAnswers={() => {}} answerResults={{}} />
+                <Question question={question} questionIndex={((currentPage-1)*PageSize)+(index+1)} type={"users"} setAnswers={() => {}} answerResults={{}} />
             </div>
         )
     })
@@ -58,7 +58,7 @@ export default function UserQuestionsDetail()
                     />
                 </div> 
                 ) : (
-                <div>
+                <div className="h-screen md:h-fit">
                     <h1 className="text-xl text-center font-semibold">Brak dodanych pytań do tej kategorii</h1>
                 </div>
             )}

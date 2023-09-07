@@ -1,6 +1,6 @@
 import React from "react";
 import "./UserQuestions.scss";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 export default function UserQuestions()
 {
@@ -8,15 +8,14 @@ export default function UserQuestions()
         <div>
             <div className="filter-container">
                 <div className="filter-grid">
-                    <Link className="filter-item" to="all">Wszystkie</Link>
-                    <Link className="filter-item" to="interna">Interna</Link>
-                    <Link className="filter-item" to="medycyna ratunkowa i intensywna terapia">Medycyna ratunkowa i intensywna terapia</Link>
-                    <Link className="filter-item" to="medycyna rodzinna">Medycyna rodzinna</Link>
-                    <Link className="filter-item" to="prawo medyczne">Prawo medyczne</Link>
-                    <Link className="filter-item" to="chirurgia">Chirurgia</Link>
-                    <Link className="filter-item" to="psychiatria">Psychiatria</Link>
-                    <Link className="filter-item" to="pediatria">Pediatria</Link>
-                    <Link className="filter-item" to="ginekologia">Ginekologia</Link>
+                    <NavLink className={({isActive}) => isActive ? "active-filter" : "filter-item"} to="interna">Interna</NavLink>
+                    <NavLink className={({isActive}) => isActive ? "active-filter" : "filter-item"} to="medycyna ratunkowa i intensywna terapia">Medycyna ratunkowa i intensywna terapia</NavLink>
+                    <NavLink className={({isActive}) => isActive ? "active-filter" : "filter-item"} to="medycyna rodzinna">Medycyna rodzinna</NavLink>
+                    <NavLink className={({isActive}) => isActive ? "active-filter" : "filter-item"} to="prawo medyczne">Prawo medyczne</NavLink>
+                    <NavLink className={({isActive}) => isActive ? "active-filter" : "filter-item"} to="chirurgia">Chirurgia</NavLink>
+                    <NavLink className={({isActive}) => isActive ? "active-filter" : "filter-item"} to="psychiatria">Psychiatria</NavLink>
+                    <NavLink className={({isActive}) => isActive ? "active-filter" : "filter-item"} to="pediatria">Pediatria</NavLink>
+                    <NavLink className={({isActive}) => isActive ? "active-filter" : "filter-item"} to="ginekologia">Ginekologia</NavLink>
                 </div>
             </div>
             <Outlet />

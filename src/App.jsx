@@ -19,6 +19,7 @@ import Quiz from './pages/Authenticated/Quiz/Quiz'
 import QuizSummary from './pages/Authenticated/QuizSummary/QuizSummary'
 import UserQuestions from './pages/Authenticated/UserQuestions/UserQuestions'
 import UserQuestionsDetail from './pages/Authenticated/UserQuestionsDetail/UserQuestionsDetail'
+import EditQuestion from './pages/Authenticated/EditQuestion/EditQuestion'
 
 export default function App() {
 
@@ -39,6 +40,7 @@ export default function App() {
           <Route path='userQuestions' element={<UserQuestions />}>
             <Route path=':name' element={<UserQuestionsDetail />} />
           </Route>
+          <Route path='userQuestions/:name/edit' element={<EditQuestion />} />
         </Route>
 
       </Route>
