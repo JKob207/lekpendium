@@ -1,5 +1,6 @@
 $primaryColor: #505DE4;
 $primaryBlack: #473335;
+$dangerColor: #DC3545;
 
 @mixin primaryBackground {
     background-color: $primaryColor;
@@ -29,7 +30,6 @@ $primaryBlack: #473335;
 @mixin primaryButton {
     @include mainButtons();
 
-    padding: .8rem 3.7rem;
     background-color: $primaryBlack;
     color: #fff;
 }
@@ -46,4 +46,13 @@ $primaryBlack: #473335;
     @media screen and (max-width: 758px) {
         font-size: 1.1em;
     }
+}
+
+@mixin dangerButton {
+    @include mainButtons();
+
+    font-weight: 600;
+    background-color: #fff;
+    color: $dangerColor;
+    border: 1px solid $dangerColor;
 }

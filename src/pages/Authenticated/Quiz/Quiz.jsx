@@ -5,6 +5,7 @@ import { getLimitedAndRandomCategoryQuestion } from "../../../services/api";
 import Pagination from "../../../components/Pagination/Pagination";
 import Question from "../../../components/Question/Question";
 import Popup from "../../../components/Popup/Popup";
+import { pad } from "../../../utils/time";
 
 export default function Quiz()
 {
@@ -61,7 +62,7 @@ export default function Quiz()
             return
         }
 
-        navigate("summary", { state: { results: results } })
+        navigate("summary", { state: { results: results, time: timerTime } })
 
     }
 
@@ -79,21 +80,14 @@ export default function Quiz()
         )
     })
 
-    function pad(value) //formating timer time
-    {
-        let valString = value + "";
-        if (valString.length < 2) {
-            return "0" + valString;
-        } else {
-            return valString;
-        }
-    }
-
     return (
         <div>
             <div className="quiz-title-container">
                 <h1 className="quiz-title">Kategoria: {params.name}</h1>
-                <h2 className="timer">{location.state.timer && (pad(parseInt(timerTime / 60) + ":" + pad(timerTime % 60)))}</h2>
+                {
+                    location.state.timer && 
+                    <h2 className="timer">{(pad(parseInt(timerTime / 60) + ":" + pad(timerTime % 60)))}</h2>
+                }
             </div>
             {questionsElements}
             <Pagination

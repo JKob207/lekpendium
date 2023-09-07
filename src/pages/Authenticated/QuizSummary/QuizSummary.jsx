@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import "./QuizSummary.scss";
 import { Link, useLocation, useParams } from "react-router-dom";
+import { pad } from "../../../utils/time";
 
 export default function QuizSummary()
 {
     const location = useLocation()
     const params = useParams()
     const resultElements = []
+
+    console.log(location.state)
 
     for (const property in location.state.results) {
         resultElements.push(
@@ -32,6 +35,13 @@ export default function QuizSummary()
             <div className="results-container">
                 {resultElements}
             </div>
+            {
+                location.state.time !== 0 && 
+                <div className="results-time text-center text-2xl font-semibold my-8">
+                    <p>Osiągnięty czas:</p>
+                    <p>{pad(parseInt(location.state.time / 60) + ":" + pad(location.state.time % 60))}</p>
+                </div>
+            }
             <div className="button">
                 <Link to="/main" className="primary-button">
                     Powrót do strony głównej

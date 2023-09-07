@@ -213,3 +213,45 @@ export const addQuestion = async (questionData, categoryName) => {
         return error.message;
     }
 }
+
+export const getUserQuestions = async (userId, categoryName) => {
+    try {
+        let questionsArray = [];
+
+        const category = await getCategory(categoryName);
+        const questionRef = collection(db, `questionsCategory/${category.id}/questions`);
+        const q = query(questionRef, where("questionOwner", "==", userId));
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            questionsArray.push({...doc.data(), id: doc.id});
+        })
+
+        return questionsArray;
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
+export const updateQuestion = async (categoryName, questionId, newQuestionData) => {
+    try {
+        const category = await getCategory(categoryName);
+        const questionRef = doc(db, "questionsCategory", category.id, "questions", questionId);
+        await updateDoc(questionRef, newQuestionData);
+        console.log(`Question ${questionId} updated!`);
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
+export const deleteQuestion = async (categoryName, questionId) => {
+    try {
+        const category = await getCategory(categoryName);
+        const questionRef = doc(db, "questionsCategory", category.id, "questions", questionId);
+        await deleteDoc(questionRef);
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}

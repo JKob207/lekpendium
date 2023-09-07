@@ -1,0 +1,43 @@
+.filter-container 
+{
+    overflow-x: auto;
+    margin: 1rem;
+}
+  
+.filter-grid 
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.active-filter
+{
+    background-color: #473335;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px dashed #fff;
+}
+  
+.filter-item 
+{
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px dashed #473335;
+}
+
+@media (max-width: 768px) {
+    .filter-grid
+    {
+        grid-auto-flow: column;
+    }
+    .filter-container 
+    {
+        overflow-x: scroll;
+        white-space: nowrap;
+    }
+}

@@ -85,7 +85,7 @@ export default function Profile()
             {
                 try {
                         const deleteAvatar = await deleteImage(user.avatar)
-                        avatarRef =  await uploadImage(formData.avatar, user.id)
+                        avatarRef = await uploadImage(formData.avatar, user.id)
                         console.log("Avatar changed!")
                     } catch (error) {
                         console.log(error)
@@ -104,8 +104,10 @@ export default function Profile()
                     email: formData.email,
                     avatar: avatarRef
                 }
-
-                const updateUser = await updateUser(user.id, updatedUser)
+                console.log("User to update: ")
+                console.log(updatedUser)
+                console.log("ID: " + user.id)
+                const newUpdateUser = await updateUser(user.id, updatedUser)
                 console.log("User updated!")
                 navigate(0)
 
@@ -139,7 +141,7 @@ export default function Profile()
 
     return (
         <div className="profile--page">
-            <div className="my-8 md:my-0 flex flex-col items-center background primary-col">
+            <div className="py-8 flex flex-col items-center background primary-col">
                 <img className="rounded-full w-44" src={userAvatar} alt="LEKpendium logo" />
                 <div className="profile--container bg-white h-full w-full px-8 rounded-t-3xl">
                     <div className="profile--form-container flex flex-col justify-center">
@@ -178,12 +180,13 @@ export default function Profile()
                                 />
                             </div>
                             <div className="form--avatar block">
-                                <label className="block text-sm font-light leading-6 text-dark" htmlFor="avatar">Zmień awatara { <span className="error text-red-600 font-semibold">{errors.avatarErrors}</span> }</label>
+                                <label className="block text-sm font-light leading-6 text-dark" htmlFor="avatar">Zmień awatara (.png, .jpg, .jpeg) { <span className="error text-red-600 font-semibold">{errors.avatarErrors}</span> }</label>
                                 <input 
                                     id="avatar"
                                     type="file"
                                     className="block w-full rounded-md border-0 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                     name="avatar"
+                                    accept=".png, .jpg, .jpeg"
                                     onChange={handleChangeFileUpload}
                                 />
                             </div>
