@@ -13,6 +13,10 @@ LEKpendium is a comprehensive web application designed to assist medical student
 To get LEKpendium up and running on your local machine, follow these steps:
 
 ``` bash
+# clone git respository:
+git clone https://github.com/JKob207/lekpendium
+cd lekpendium
+
 # install node.js dependencies:
 npm install
 
