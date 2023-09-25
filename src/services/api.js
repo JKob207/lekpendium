@@ -182,9 +182,46 @@ export const getCategoryQuestions = async (categoryName) => {
     }
 }
 
+export const getAllQuestions = async () => {
+    try {
+        const categoriesArr = ["pulmonologia", "medycyna ratunkowa i intensywna terapia", "gastroenterologia", "nefrologia", "medycyna rodzinna", "diabetologia", "prawo medyczne", "endokrynologia", "onkologia", "chirurgia", "psychiatria", "pediatria", "ginekologia", "reumatologia", "hematologia", "kardiologia"];
+        
+        const pulmonologiaQuestions = await getCategoryQuestions("pulmonologia");
+        const ratunkowaQuestions = await getCategoryQuestions("medycyna ratunkowa i intensywna terapia");
+        const gastroQuestions = await getCategoryQuestions("gastroenterologia");
+        const nefroQuestions = await getCategoryQuestions("nefrologia");
+        const rodzinnaQuestions = await getCategoryQuestions("medycyna rodzinna");
+        const diabetologiaQuestions = await getCategoryQuestions("diabetologia");
+        const prawoQuestions = await getCategoryQuestions("prawo medyczne");
+        const endoQuestions = await getCategoryQuestions("endokrynologia");
+        const onkologiaQuestions = await getCategoryQuestions("onkologia");
+        const chirurgiaQuestions = await getCategoryQuestions("chirurgia");
+        const psychiatriaQuestions = await getCategoryQuestions("psychiatria");
+        const pediatriaQuestions = await getCategoryQuestions("pediatria");
+        const ginekologiaQuestions = await getCategoryQuestions("ginekologia");
+        const reumatologiaQuestions = await getCategoryQuestions("reumatologia");
+        const hematologiaQuestions = await getCategoryQuestions("hematologia");
+        const kardiologiaQuestions = await getCategoryQuestions("kardiologia");
+
+        const questions = [...pulmonologiaQuestions, ...ratunkowaQuestions, ...gastroQuestions, ...nefroQuestions, ...rodzinnaQuestions, ...diabetologiaQuestions, ...prawoQuestions, ...endoQuestions, ...onkologiaQuestions, ...chirurgiaQuestions, ...psychiatriaQuestions, ...pediatriaQuestions, ...ginekologiaQuestions, ...reumatologiaQuestions, ...hematologiaQuestions, ...kardiologiaQuestions];
+        return questions;
+    } catch (error) {
+        console.log(error.message);
+        return error.message;
+    }
+}
+
 export const getLimitedAndRandomCategoryQuestion = async (categoryName, limitAmount) => {
     try {
-        const categoryQuestions = await getCategoryQuestions(categoryName);
+        let categoryQuestions = [];
+        if(categoryName === "all")
+        {
+            categoryQuestions = await getAllQuestions();
+        }else
+        {
+            categoryQuestions = await await getCategoryQuestions(categoryName);
+        }
+
         categoryQuestions.sort(() => Math.random() - 0.5);
         const questionsArray = [];
         const limit = limitAmount > categoryQuestions.length ? categoryQuestions.length : limitAmount;

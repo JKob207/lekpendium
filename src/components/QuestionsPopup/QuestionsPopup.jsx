@@ -29,7 +29,7 @@ export default function QuestionsPopup({category, closePopup})
                                     type="range"
                                     id="max-value"
                                     min={5}
-                                    max={50}
+                                    max={category === "all" ? 200 : 50}
                                     step={1}
                                     onChange={changeAmount}
                                     value={amount}
@@ -56,7 +56,7 @@ export default function QuestionsPopup({category, closePopup})
                         </label>
                     </div>
                     <Link
-                        to='quiz'
+                        to={category === 'all' ? 'category/all/quiz' : 'quiz'}
                         state={{amount: amount, timer: timer}}
                         className="primary-button my-7"
                     >Rozpoczynam</Link>
