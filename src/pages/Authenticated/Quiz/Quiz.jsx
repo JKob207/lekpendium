@@ -24,7 +24,7 @@ export default function Quiz()
         const getQuestions = async () => {
             try {
                 const questionArr = await getLimitedAndRandomCategoryQuestion(params.name, location.state.amount)
-                //console.log(questionArr)
+                console.log(questionArr)
                 setQuestions(questionArr)
             } catch (error) {
                 console.log(error)
@@ -83,13 +83,17 @@ export default function Quiz()
     return (
         <div>
             <div className="quiz-title-container">
-                <h1 className="quiz-title">Kategoria: {params.name}</h1>
+                <h1 className="quiz-title">Kategoria: {params.name === 'all' ? "wszystkie" : params.name}</h1>
                 {
                     location.state.timer && 
                     <h2 className="timer">{(pad(parseInt(timerTime / 60) + ":" + pad(timerTime % 60)))}</h2>
                 }
             </div>
-            {questionsElements}
+            {
+                questionsElements.length === 0 ?
+                <h2>Loading...</h2> :
+                questionsElements
+            }
             <Pagination
                 className="pagination-bar"
                 currentPage={currentPage}
