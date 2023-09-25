@@ -99,7 +99,8 @@ export default function Register()
                     name: formData.name,
                     surname: formData.surname,
                     email: formData.email,
-                    avatar: avatarRef
+                    avatar: avatarRef,
+                    favourite: []
                 }
                 console.log(newUser)
                 await addUser(newUser)
