@@ -20,6 +20,7 @@ import QuizSummary from './pages/Authenticated/QuizSummary/QuizSummary'
 import UserQuestions from './pages/Authenticated/UserQuestions/UserQuestions'
 import UserQuestionsDetail from './pages/Authenticated/UserQuestionsDetail/UserQuestionsDetail'
 import EditQuestion from './pages/Authenticated/EditQuestion/EditQuestion'
+import Favourite from './pages/Authenticated/Favourite/Favourite'
 
 export default function App() {
 
@@ -41,6 +42,7 @@ export default function App() {
             <Route path=':name' element={<UserQuestionsDetail />} />
           </Route>
           <Route path='userQuestions/:name/edit' element={<EditQuestion />} />
+          <Route path='favourite' element={<Favourite />} />
         </Route>
 
       </Route>

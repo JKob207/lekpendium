@@ -12,10 +12,7 @@ export default function Dropdown({ toggleState })
                     <Link to="profile" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profil</Link>
                 </li>
                 <li>
-                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Statystyki</a>
-                </li>
-                <li>
-                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ulubione</a>
+                    <Link to="favourite" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Ulubione</Link>
                 </li>
                 <li>
                     <Link to="userQuestions/interna" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Twoje pytania</Link>
